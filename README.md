@@ -13,7 +13,7 @@ Since you are working on WSL2, you will need to create the following environment
 
 > Make sure that the `.config` path exists.
 
-Paste the following `wezterm.lua` file into the `%XDG_CONFIG_HOME%` path.
+ Create the `wezterm.lua` file from the repository into the `%XDG_CONFIG_HOME%` path.
 
 ## Bindings
 
