@@ -3,10 +3,12 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- store the actual configuration
+
 config.font = wezterm.font("D2CodingLigature Nerd Font")
 config.font_size = 12.0
 config.window_background_opacity = 0.7
 config.color_scheme = "Rasi"
+config.win32_system_backdrop = "Acrylic"
 
 -- keybinding
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 3000 }
@@ -81,7 +83,7 @@ config.keys = {
 	{ key = "T", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
 }
 
--- Tab index mapping
+-- tab index mapping
 for i = 1, 9 do
 	table.insert(config.keys, {
 
@@ -90,5 +92,21 @@ for i = 1, 9 do
 		action = act.ActivateTab(i - 1),
 	})
 end
+
+-- toggle on focus change:
+wezterm.on("window-focus-changed", function(win, pane)
+	local overrides = {}
+
+	if win:is_focused() then
+		-- window is focused - enable blur + semi‑transparency
+		overrides.win32_system_backdrop = "Acrylic"
+		overrides.window_background_opacity = 0.5
+	else
+		-- window is unfocused - solid background, no blur
+		overrides.win32_system_backdrop = "Disable"
+		overrides.window_background_opacity = 0.7
+	end
+	win:set_config_overrides(overrides)
+end)
 
 return config
