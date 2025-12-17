@@ -3,11 +3,11 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- store the actual configuration
-config.enable_kitty_graphics = true
+config.enable_kitty_graphics = true -- NOTE: as of 12-17-2025, this does not work 100%.
 config.font = wezterm.font("D2CodingLigature Nerd Font")
 config.font_size = 12.0
 config.window_background_opacity = 0.7
-config.color_scheme = "Rasi"
+config.color_scheme = "Spring (Gogh)"
 config.win32_system_backdrop = "Acrylic"
 config.default_domain = 'WSL:Ubuntu'
 
@@ -67,6 +67,7 @@ config.keys = {
 		action = act.CloseCurrentPane({ confirm = true }),
 	},
 
+	-- pane movement
 	{
 		key = "h",
 		mods = "LEADER",
